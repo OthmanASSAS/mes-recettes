@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, FlatList, Text, StyleSheet, Button } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { fetchRecipes } from '../../../api/recipes';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,7 @@ const RecipesListScreen = ({ navigation }) => {
     fetchRecipes(dispatch);
   }, []);
   const _renderItem = ({ item }) => {
-    return <RecipeListItem item={item} />;
+    return <RecipeListItem item={item} navigation={navigation} />;
   };
 
   return (
@@ -23,12 +23,6 @@ const RecipesListScreen = ({ navigation }) => {
         data={recipes}
         renderItem={_renderItem}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
-      />
-      <Button
-        onPress={() => {
-          navigation.navigate('RecipesDetails');
-        }}
-        title="Aller sur l'écran détails"
       />
     </View>
   );
